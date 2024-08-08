@@ -1,0 +1,88 @@
+.Org {
+  padding: 0;
+  margin: 0;
+}
+
+.subOrgPara1 {
+  font-size: 30px;
+  letter-spacing: 2px;
+  margin-left: 25vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.subOrgPara2 {
+  margin-left: 25vh;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  letter-spacing: 1px;
+}
+
+.Ohidden1 {
+  min-height: 90vh;
+}
+
+
+
+.OrgImg1 {
+  height: 80vh;
+  margin-left: 100vh;
+  position: absolute;
+  margin-top: 10vh;
+  width: 100vh;
+}
+
+.featured-events {
+  margin-bottom: 50px;
+  /* background-color: black; */
+}
+
+.events-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.event-card {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  text-align: center;
+  margin: 10px;
+}
+.event-card:hover{
+  transform: scale(1.02);
+}
+
+.OrgImg{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.Orgbtn {
+  background-color: #ff9800;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.Orgbtn:hover {
+  background-color: #e68900;
+}
+.Orgh2
+{ 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: 5vh;
+  /* color: #f4f4f4; */
+
+}
+
+
+

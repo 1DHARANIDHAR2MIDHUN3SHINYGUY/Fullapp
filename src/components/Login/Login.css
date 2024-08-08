@@ -1,0 +1,119 @@
+.BB{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+    background-image: url(../../image/whiteimg.jpg);
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+
+    /* height: 100vh; */
+    
+}
+
+.logForm {
+    height: 450px;
+    width: 350px;
+    border: 1px solid black;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom:5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    /* overflow: hidden; */
+    /* margin-left: 100px; */
+    /* background-color:black; */
+}
+
+.logh3 {
+    font-family: sans-serif;
+    text-align: center;
+    color:black;
+}
+
+
+.logBtn {
+    height: 40px;
+    width: 100%;
+    background-color:#189cfc;
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    /* border: black; */
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.logBtn:hover {
+    background-color:white;
+    color: black;
+    transition: 0.5s;
+}
+
+/* .form p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 1em;
+    letter-spacing: 2px;
+} */
+
+.anch1 {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.lll {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding-top: 15px;
+    text-align: center;
+    font-size: 1em;
+    letter-spacing: 2px;
+}
+
+.anch2 {
+    margin-left: 25px;
+}
+
+.awes {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.svg1 {
+    border-radius: 10px;
+    height: 40px;
+    background-color: white;
+    margin: 0 10px;
+    transition: transform 0.5s, background-color 0.5s;
+}
+
+.svg1:hover {
+    /* background-color: blue; */
+    transform: rotate(360deg);
+}
+.logSign
+{
+    margin-left: 5px;
+    border: none;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    color: #189cfc;
+    background-color: transparent;
+}
+.logSign:hover{
+    cursor: pointer;
+}
+

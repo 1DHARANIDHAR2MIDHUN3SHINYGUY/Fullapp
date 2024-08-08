@@ -1,0 +1,181 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "gohul",
+      "email": "gohul@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": "2",
+      "username": "dharani",
+      "email": "dharani@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": "be0b",
+      "name": "",
+      "email": "kavin@gmail.com",
+      "password": "123456",
+      "username": "kavin"
+    }
+  ],
+  "admin": [
+    {
+      "id": "qwe",
+      "username": "Admin1",
+      "email": "admin1@gmail.com",
+      "password": "123"
+    }
+  ],
+  "corporateEvents": [
+    {
+      "id": "1",
+      "name": "CLUB PARTIES",
+      "description": "Club parties are social events typically held in nightclubs or similar venues where people gather to dance, socialize, and enjoy music. These parties often feature live DJs or musical performances, and the atmosphere is lively with dim lighting, flashing lights, and a variety of sound systems.",
+      "date": "2024-08-15",
+      "time": "09:00 am - 1:00 pm",
+      "venue": "#6 Hotels",
+      "image": "https://w0.peakpx.com/wallpaper/121/629/HD-wallpaper-nightclub-party-wild-party-club.jpg",
+      "gmap": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15664.611298587743!2d76.9520944!3d11.0271584!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba858ee4a00e09d%3A0x493ee5ef51e60ce5!2sHash%20Six%20Hotels!5e0!3m2!1sen!2sin!4v1722418418699!5m2!1sen!2sin",
+      "location": "Saibaba Colony,Coimbatore",
+      "capacity": "140"
+    },
+    {
+      "id": "2",
+      "name": "Marriage Events",
+      "description": "Marriage events, commonly referred to as weddings, encompass the various ceremonies and celebrations associated with the union of two individuals in matrimony. These events often follow a series of traditions and customs that can vary greatly depending on cultural, religious, and personal preferences.",
+      "date": "2024-09-15",
+      "time": "10:00 am - 1:00 pm",
+      "venue": "Taj Palace",
+      "image": "https://shaadhiweddings.com/wp-content/uploads/2024/02/shaadhi-wedding-management-4.png",
+      "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1522942546617!2d77.1708036!3d28.5952077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d155a5030a7%3A0xefa48735ea5496eb!2sTaj%20Palace%2C%202%2C%20Sardar%20Patel%20Marg%2C%20Diplomatic%20Enclave%2C%20Chanakyapuri%2C%20New%20Delhi%2C%20Delhi%20110021!5e0!3m2!1sen!2sin!4v1722451386730!5m2!1sen!2sin",
+      "location": "New Delhi",
+      "capacity": "117"
+    },
+    {
+      "id": "3",
+      "name": "Birthday Celebrations",
+      "description": "Birthday celebrations are events held to commemorate the anniversary of a person's birth. These celebrations can vary widely in scale and style, depending on the age of the celebrant, cultural traditions, and personal preferences.A variety of snacks, meals, and beverages are typically provided. A birthday cake is a central feature, often decorated according to the party's theme",
+      "date": "2024-10-05",
+      "time": "11:00 am - 3:20 pm",
+      "venue": "The Leela Palace",
+      "image": "https://www.lumina.com.ph/assets/news-and-blogs-photos/Celebrate-Birthday-at-Home-with-Family-5-Simple-Ideas-and-Themes/Celebrate-Birthday-at-Home-with-Family-5-Simple-Ideas-and-Themes.webp",
+      "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1522942546617!2d77.1708036!3d28.5952077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d155a5030a7%3A0xefa48735ea5496eb!2sTaj%20Palace%2C%202%2C%20Sardar%20Patel%20Marg%2C%20Diplomatic%20Enclave%2C%20Chanakyapuri%2C%20New%20Delhi%2C%20Delhi%20110021!5e0!3m2!1sen!2sin!4v1722451386730!5m2!1sen!2sin",
+      "location": "Bengaluru",
+      "capacity": "114"
+    },
+    {
+      "id": "4",
+      "name": "Conference Events",
+      "description": "Conference events are organized gatherings where individuals or groups come together to discuss, share, and learn about specific topics or industries. These events can vary in size and scope,To connect professionals, experts, and peers for collaboration and relationship-building.",
+      "date": "2024-11-20",
+      "time": "12:00 pm - 4:00 pm",
+      "venue": "Business Hall",
+      "image": "https://www.arin.net/participate/meetings/meetings.jpg",
+      "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1522942546617!2d77.1708036!3d28.5952077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d155a5030a7%3A0xefa48735ea5496eb!2sTaj%20Palace%2C%202%2C%20Sardar%20Patel%20Marg%2C%20Diplomatic%20Enclave%2C%20Chanakyapuri%2C%20New%20Delhi%2C%20Delhi%20110021!5e0!3m2!1sen!2sin!4v1722451386730!5m2!1sen!2sin",
+      "location": "Mumbai",
+      "capacity": "117"
+    },
+    {
+      "id": "5",
+      "name": "Product Launch",
+      "description": "A product launch is an event or series of activities designed to introduce a new product to the market. It is a critical phase in the product lifecycle aimed at generating buzz, attracting customers, and driving initial sales.Setting clear objectives such as sales targets, market penetration, or brand awareness.",
+      "date": "2024-12-15",
+      "time": "3:00 pm - 6:00 pm",
+      "venue": "Green Hall",
+      "image": "https://assets.entrepreneur.com/content/3x2/2000/20180404151451-HED-Launch-MaryDelaney-TheOracles.jpeg",
+      "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1522942546617!2d77.1708036!3d28.5952077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d155a5030a7%3A0xefa48735ea5496eb!2sTaj%20Palace%2C%202%2C%20Sardar%20Patel%20Marg%2C%20Diplomatic%20Enclave%2C%20Chanakyapuri%2C%20New%20Delhi%2C%20Delhi%20110021!5e0!3m2!1sen!2sin!4v1722451386730!5m2!1sen!2sin",
+      "location": "Hyderabad",
+      "capacity": "117"
+    },
+    {
+      "id": "6",
+      "name": "Trade Show",
+      "description": "Setting clear objectives such as sales targets, market penetration, or brand awareness.Companies set up booths or stalls to display their products, conduct demonstrations, and distribute promotional materials.",
+      "date": "2025-01-25",
+      "time": "09:30 am - 12:30 pm",
+      "venue": "Finance Hub",
+      "image": "https://d2n4wb9orp1vta.cloudfront.net/cms/brand/pf/2021-pf/pfnov21photofinish1.jpg",
+      "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1522942546617!2d77.1708036!3d28.5952077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d155a5030a7%3A0xefa48735ea5496eb!2sTaj%20Palace%2C%202%2C%20Sardar%20Patel%20Marg%2C%20Diplomatic%20Enclave%2C%20Chanakyapuri%2C%20New%20Delhi%2C%20Delhi%20110021!5e0!3m2!1sen!2sin!4v1722451386730!5m2!1sen!2sin",
+      "location": "Kochi",
+      "capacity": "117"
+    }
+  ],
+  "event_register": [
+    {
+      "id": "da46",
+      "firstName": "Nick",
+      "lastName": "Anto Roy",
+      "email": "nickanto555@gmail.com",
+      "age": "21",
+      "businessName": "21",
+      "organizationName": "21",
+      "businessAddress": "L-273,Police Quarters,Ganapathy,bharathi nagar.",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "zipcode": "641006",
+      "userId": "a8e2",
+      "eventId": 1
+    },
+    {
+      "id": "80e9",
+      "firstName": "Nick",
+      "lastName": "Anto Roy",
+      "email": "nickanto555@gmail.com",
+      "age": "4",
+      "businessName": "dldfns",
+      "organizationName": "d;fnsnd;l",
+      "businessAddress": "L-273,Police Quarters,Ganapathy,bharathi nagar.",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "zipcode": "641006",
+      "userId": "a8e2",
+      "eventId": 1
+    },
+    {
+      "id": "6119",
+      "firstName": "Nick",
+      "lastName": "Anto Roy",
+      "email": "nickanto555@gmail.com",
+      "age": "77777",
+      "businessName": "7777",
+      "organizationName": "7777",
+      "businessAddress": "L-273,Police Quarters,Ganapathy,bharathi nagar.",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "zipcode": "641006",
+      "userId": "43ff",
+      "eventId": 1
+    },
+    {
+      "id": "9f8b",
+      "firstName": "fdfhfg",
+      "lastName": "gfhfsg",
+      "email": "nickanto555@gmail.com",
+      "age": "26",
+      "businessName": "dgfgdf",
+      "organizationName": "dfgdgh",
+      "businessAddress": "L-273,Police Quarters,Ganapathy,bharathi nagar.",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "zipcode": "641006",
+      "userId": "a8e2",
+      "eventId": 1
+    },
+    {
+      "id": "9914",
+      "firstName": "wert",
+      "lastName": "wert",
+      "email": "22ai019@skcet.ac.in",
+      "age": "14",
+      "businessName": "fgf",
+      "organizationName": "dfgb",
+      "businessAddress": "ghfds",
+      "city": "saddfvb",
+      "state": "bvcxzz",
+      "zipcode": "zxcvc",
+      "userId": null
+    }
+  ]
+}

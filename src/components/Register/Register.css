@@ -1,0 +1,105 @@
+
+.BBB{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+    /* background-color: red; */
+   
+    /* height: 100vh; */
+    
+}
+
+.regForm {
+    height: 460px;
+    width: 350px;
+    /* border: 1px solid black; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom:5px;
+    padding-left: 80px;
+    padding-right: 40px;
+    /* overflow: hidden; */
+    /* background-color:black; */
+}
+
+.regh3 {
+    font-family: sans-serif;
+    /* text-align: center; */
+    color:black;
+    margin-left: 13vh;
+}
+
+
+.regBtn{
+    height: 40px;
+    width: 440px;
+    background-color:#10144c;
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    /* border: black; */
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.regBtn:hover {
+    background-color:white;
+    color: black;
+    transition: 0.5s;
+}
+
+/* .form p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 1em;
+    letter-spacing: 2px;
+} */
+
+/* .anch1 {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+} */
+
+.regPara
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding-top: 15px;
+    /* text-align: center; */
+    font-size: 1em;
+    letter-spacing: 2px;
+}
+.regImage
+{
+    background-size: cover;
+    width: 35%;
+    /* height: 10%; */
+    /* margin-right:100px; */
+    
+}
+.regLogin
+{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    color: #10144c;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+
+
+
+
+

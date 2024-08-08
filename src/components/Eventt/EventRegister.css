@@ -1,0 +1,15 @@
+.EventRegLabel {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+
+}
+
+.EventRegImg {
+  height: 60vh;
+  margin-left: 110vh;
+  position: absolute;
+  margin-top: 12vh;
+  width: 80vh;
+}
+
+.form-control {}
