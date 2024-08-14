@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../Eventt/EventOrganizer.css';
 
 const organizers = [
@@ -206,6 +206,9 @@ const organizers = [
 ];
 
 function EventOrganizer({ isAuthenticated }) {
+
+  
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const handleOrganizerClick = (organizer) => {
@@ -214,8 +217,8 @@ function EventOrganizer({ isAuthenticated }) {
     //   navigate('/login');
     // }
     // navigate('/book-organizer', { state: { organizer } });
-    navigate('/bookorganizer');
-  };
+    navigate(`/bookorganizer/${id}`);
+  }
   return (
     <div className="organizers-container">
       <h2 className='EventOrgh2'>Event Organizers</h2>

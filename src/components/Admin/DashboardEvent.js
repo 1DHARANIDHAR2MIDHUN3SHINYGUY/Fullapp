@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Admin/DashboardEvent.css'
+import { Link } from 'react-router-dom';
+import { TokenContext } from '../Context/TokenProvider';
+// import UserContext from '../Context/UserContext';
 
 const DashEvent = () => {
   const [data, setData] = useState([]);
+  const {token}=useContext(TokenContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/corporateEvents');
+        const response = await axios.get('http://localhost:8000/corporate-events/',{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -29,59 +39,58 @@ const DashEvent = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered">
-          <thead className="thead-dark">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Venue</th>
-              <th>Location</th>
-              <th>Date</th>
-              <th>Edit</th>
+    
+      <div className="manageEvent">
+        <p className='manageEventp'>EVENTS</p>
+        <table className="table1">
+            <tr className='table1tr'>
+              <th className='table1th'>ID</th>
+              <th className='table1th'>Name</th>
+              <th className='table1th'>Venue</th>
+              <th className='table1th'>Location</th>
+              <th className='table1th'>Date</th>
+              <th className='table1th'>Edit</th>
             </tr>
-          </thead>
+        
           <tbody>
             {data.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.venue}</td>
-                <td>{item.location}</td>
-                <td>{item.date}</td>
-                <td>
+              <tr className='table1tr'key={item.id}>
+                <td className='table1td'>{item.id}</td>
+                <td className='table1td'>{item.name}</td>
+                <td className='table1td'>{item.venue}</td>
+                <td className='table1td'>{item.location}</td>
+                <td className='table1td'>{item.date}</td>
+                <td className='table1td'>
+                  {/* <a href={`/events-edit/${item.id}`}> */}
                   <a href={`/events-edit/${item.id}`}>
                   
-                  <Button
-                    variant="warning"
-                    
-                  >
+                  <button className='manageEventbtn1'>
                     Edit
-                  </Button>
+                  </button>
                   </a>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
-      <a style={{
+      
+      {/* <a style={{
           position: 'fixed',
           top: '20px',
           right: '20px',
           zIndex: 1000
-        }} href='/event-add'>
+        }} href='/event-add'> */}
 
-
-      <Button
+<Link to="/event-add"><button className='manageEventbtn2'>Add New Event</button></Link>
+      {/* <Button
         variant="danger"
    
       >
-        Add New Event
+        
       </Button>
-        </a>
+        </a> */}
     </div>
+    
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -14,9 +14,11 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import '../Register/Register.css';
 import img1 from '../../image/img1.png';
+import { TokenContext } from '../Context/TokenProvider';
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
+  const {token}=useContext(TokenContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -115,33 +117,44 @@ function Register() {
     validateEmail(email);
     validatePassword(password);
     validateConfirmPassword(confirmPassword);
-
+  
     if (!confirmPassword) {
       setConfirmPasswordError('Confirm Password is required');
       return;
     }
-
+  
     if (!nameError && !emailError && !passwordError && !confirmPasswordError) {
       const handlePost = async () => {
         const data = {
-          id: uuidv4(), // Generate a unique ID
-          name: name,
+          username: name,
           email: email,
           password: password,
         };
-
+  
         try {
-          const response = await axios.post(`http://localhost:8080/users`, data);
+          const response = await axios.post(`http://localhost:8000/users/`, data, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+  
           console.log(response);
           navigate('/login');
         } catch (error) {
-          console.log(error);
+          console.error('Error response:', error.response); // Log the full error response
+          if (error.response && error.response.data) {
+            console.error('Error message:', error.response.data.message); // Log the error message if available
+          } else {
+            console.error('Error:', error.message); // Log a generic error message
+          }
         }
       };
-
+  
       handlePost();
     }
   };
+  
 
   return (
     <div className='BBB'>

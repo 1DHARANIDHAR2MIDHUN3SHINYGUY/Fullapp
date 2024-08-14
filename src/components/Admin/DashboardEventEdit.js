@@ -1,8 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Admin/DashboardEventEdit.css'
+import { useRef } from 'react';
+import { TokenContext } from '../Context/TokenProvider';
 
 const EventEdit = () => {
+
+  const sectionsRef = useRef([]);
+  const {token}=useContext(TokenContext);
+
+  useEffect(() => {
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('show');
+              } else {
+                  entry.target.classList.remove('show');
+              }
+          });
+      });
+
+      const elements = sectionsRef.current.filter(Boolean); // Filter out null values
+
+      elements.forEach((el) => observer.observe(el));
+
+      return () => {
+          elements.forEach((el) => observer.unobserve(el));
+      };
+  }, []);
+
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState({
@@ -12,7 +40,7 @@ const EventEdit = () => {
     date: '',
     image: '',
     capacity: 0,
-    small_description: '',
+    description: '',
     location: '',
     gmap: '',
   });
@@ -22,7 +50,12 @@ const EventEdit = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/corporateEvents/${id}`);
+        const response = await axios.get(`http://localhost:8000/corporate-events/${id}/`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         setEvent(response.data);
       } catch (error) {
         console.error('Error fetching event data:', error);
@@ -78,7 +111,12 @@ const EventEdit = () => {
         image: imageUrl,
       };
 
-      await axios.put(`http://localhost:8080/corporateEvents/${id}`, updatedEvent);
+      await axios.patch(`http://localhost:8000/corporate-events/${id}/`, updatedEvent,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       navigate('/admin/events');
     } catch (error) {
       console.error('Error updating event:', error);
@@ -90,7 +128,12 @@ const EventEdit = () => {
   const handleDelete = async () => {
     setLoading(true); // Start loading
     try {
-      await axios.delete(`http://localhost:8080/corporateEvents/${id}`);
+      await axios.delete(`http://localhost:8000/corporate-events/${id}/`,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':  `Bearer ${token}`,
+        },
+      });
       navigate('/admin/events');
     } catch (error) {
       console.error('Error deleting event:', error);
@@ -100,67 +143,71 @@ const EventEdit = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Edit Event</h2>
-      <form>
-        <div className="mb-3">
-          <label className="form-label">Name</label>
-          <input
+    <div className="eventEditFull">
+      <table className='eventEditTable'>
+      <section ref={(el) => (sectionsRef.current[0] = el)} className="EventReghidden1">
+      <p className='eventEditp'>EDIT EVENT</p>
+      <form className='eventEditForm'>
+        <tr>
+          {/* <div className="eventEditdiv1"> */}
+          <td><label className="eventEditl">Name</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventEditInput"
             name="name"
             value={event.name}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Venue</label>
-          <input
+          /></td>
+        
+        </tr>
+        <tr>
+        <td><label className="eventEditl">Venue</label></td>
+        <td><input
             type="text"
-            className="form-control"
+            className="eventEditInput"
             name="venue"
             value={event.venue}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Date</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+        <td><label className="eventEditl">Date</label></td>
+        <td><input
             type="text"
-            className="form-control"
+            className="eventEditInput"
             name="date"
             value={event.date}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Location</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+        <td><label className="eventEditl">Location</label></td>
+        <td><input
             type="text"
-            className="form-control"
+            className="eventEditInput"
             name="location"
             value={event.location}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Capacity</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+        <td><label className="eventEditl">Capacity</label></td>
+        <td><input
             type="number"
-            className="form-control"
+            className="eventEditInput"
             name="capacity"
             value={event.capacity}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Image</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+        <td><label className="eventEditl">Image</label></td>
+        <td><input
             type="file"
-            className="form-control"
+            className="eventEditInput"
             accept="image/*"
             onChange={handleFileChange}
-          />
+          /></td>
           {imageFile && (
             <img
               src={URL.createObjectURL(imageFile)}
@@ -168,24 +215,26 @@ const EventEdit = () => {
               style={{ marginTop: '10px', maxWidth: '100%' }}
             />
           )}
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Google Map</label>
-          <input
+        </tr>
+        <tr>
+        <td><label className="eventEditl">Google Map</label></td>
+        <td><input
             type="text"
-            className="form-control"
+            className="eventEditInput"
             name="gmap"
             value={event.gmap}
             onChange={handleChange}
-          />
-        </div>
-        <button type="button" className="btn btn-primary" onClick={handleSave} disabled={loading}>
+          /></td>
+        </tr>
+        <button onClick={handleSave} disabled={loading} className='eventEditBtn1'>
           {loading ? 'Saving...' : 'Save'}
         </button>
-        <button type="button" className="btn btn-danger ms-2" onClick={handleDelete} disabled={loading}>
+        <button onClick={handleDelete} disabled={loading} className='eventEditBtn2'>
           {loading ? 'Deleting...' : 'Delete'}
         </button>
       </form>
+      </section>
+        </table>
     </div>
   );
 };

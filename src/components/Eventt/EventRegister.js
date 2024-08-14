@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../Eventt/EventRegister.css';
-import { useEffect, useRef } from 'react';
 import VirtualPart from '../../image/virtual-participation.png';
-import PaymentPage from './PaymentPage';
+import { TokenContext } from '../Context/TokenProvider';
+import UserContext from '../Context/UserContext';
 
 const EventRegister = () => {
-
-    const sectionsRef = useRef([]);
+  const sectionsRef = useRef([]);
+  const { user } = useContext(UserContext);
+  const { token } = useContext(TokenContext);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -21,7 +24,7 @@ const EventRegister = () => {
       });
     });
 
-    const elements = sectionsRef.current.filter(Boolean); // Filter out null values
+    const elements = sectionsRef.current.filter(Boolean);
 
     elements.forEach((el) => observer.observe(el));
 
@@ -30,209 +33,152 @@ const EventRegister = () => {
     };
   }, []);
 
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    age: '',
+    city: '',
+    state: '',
+    zipcode: '',
+    eventId: parseInt(id),
+    userId: user.id,
+  });
 
-    let { eventId } = useParams(); // Extract eventId from the URL parameters
-    const navigate = useNavigate();
-    const userId = localStorage.getItem('userId'); // Get userId from localStorage
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        age: '',
-        businessName: '',
-        organizationName: '',
-        businessAddress: '',
-        city: '',
-        state: '',
-        zipcode: '',
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const data = { ...formData };
 
+    console.log('Data sent to server:', data);
 
+    try {
+      const response = await axios.post('http://localhost:8000/event-registers/', data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
 
-        const data = { ...formData, userId, eventId }; // Include userId and eventId in the data sent to the server
+      const paymentId=response.data.id;
+      if (response.status === 200 || response.status === 201) {
+        alert('Registration successful!');
+        navigate(`/payment/${paymentId}`);
+      } else {
+        alert('Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting registration:', error.response);
+      alert('An error occurred. Please try again later.');
+    }
+  };
 
-        console.log('Data sent to server:', data); // Log data to verify eventId inclusion
+  return (
+    <div className="EventRegFull">
+      <table className="EventRegTable">
+        <section ref={(el) => (sectionsRef.current[0] = el)} className="EventReghidden1">
+          <img className="EventRegImg" src={VirtualPart} alt="Virtual Participation" />
+          <p className="EventRegh1">Event Registration</p>
+          <form className="eventRegForm" onSubmit={handleSubmit}>
+            <tr>
+              <td><label className="eventRegLabel" htmlFor="firstName">First Name: </label></td>
+              <td><input
+                type="text"
+                id="firstName"
+                className="eventRegInput"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              /></td>
+            </tr>
+            <tr>
+              <td><label className="eventRegLabel" htmlFor="lastName">Last Name: </label></td>
+              <td><input
+                type="text"
+                id="lastName"
+                className="eventRegInput"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              /></td>
+            </tr>
+            <tr>
+              <td><label className="eventRegLabel" htmlFor="email">Email: </label></td>
+              <td><input
+                type="email"
+                id="email"
+                className="eventRegInput"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              /></td>
+            </tr>
+            <tr>
+              <td><label className="eventRegLabel" htmlFor="age">Age: </label></td>
+              <td><input
+                type="number"
+                id="age"
+                className="eventRegInput"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                required
+              /></td>
+            </tr>
+            <tr>
+              <td><label className="eventRegLabel" htmlFor="city">City: </label></td>
+              <td><input
+                type="text"
+                id="city"
+                className="eventRegInput"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+              /></td>
+            </tr>
+            <tr>
+              <td><label className="eventRegLabel" htmlFor="state">State: </label></td>
+              <td><input
+                type="text"
+                id="state"
+                className="eventRegInput"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                required
+              /></td>
+            </tr>
+            <tr>
+              <td><label className="eventRegLabel" htmlFor="zipcode">Zipcode: </label></td>
+              <td><input
+                type="text"
+                id="zipcode"
+                className="eventRegInput"
+                name="zipcode"
+                value={formData.zipcode}
+                onChange={handleChange}
+                required
+              /></td>
+            </tr>
 
-        try {
-            const response = await axios.post('http://localhost:8080/event_register', data);
-
-            if (response.status === 200 || response.status === 201) {
-                alert('Registration successful!');
-                navigate('/payment');
-            } else {
-                alert('Registration failed. Please try again.');
-            }
-        } catch (error) {
-            console.error('Error submitting registration:', error);
-            alert('An error occurred. Please try again later.');
-        }
-    };
-
-    return (
-        <div className='EventRegFull'>
-            <table>
-            <section ref={(el) => (sectionsRef.current[0] = el)} className="EventReghidden1">
-            <img className="EventRegImg"src={VirtualPart} />
-            <h1 className='EventRegh1'>Event Registration</h1>
-            <form className="registration-form" onSubmit={handleSubmit}>
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="firstName">First Name: </label></td>
-                <td><input
-                    type="text"
-                    id="firstName"
-                    className="form-control"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                />
-                </td>
-                </tr>
-                <br />
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="lastName">Last Name: </label></td>
-                <td><input
-                    type="text"
-                    id="lastName"
-                    className="form-control"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                />
-                </td>
-                </tr>
-
-                <br />
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="email">Email: </label></td>
-                <td><input
-                    type="email"
-                    id="email"
-                    className="form-control"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-                </td>
-                </tr>
-                <br />
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="age">Age: </label></td>
-                <td><input
-                    type="number"
-                    id="age"
-                    className="form-control"
-                    name="age"
-                    value={formData.age}
-                    onChange={handleChange}
-                    required
-                />
-                </td>
-                </tr>
-
-                <br />
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="businessName">Business Name: </label></td>
-                <td><input
-                    type="text"
-                    id="businessName"
-                    className="form-control"
-                    name="businessName"
-                    value={formData.businessName}
-                    onChange={handleChange}
-                />
-                </td>
-                </tr>
-                <br />
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="organizationName">Organization Name: </label></td>
-                <td><input
-                    type="text"
-                    id="organizationName"
-                    className="form-control"
-                    name="organizationName"
-                    value={formData.organizationName}
-                    onChange={handleChange}
-                />
-                </td>
-                </tr>
-
-<br />
-<tr>
-<td><label className="EventRegLabel" htmlFor="businessAddress">Business Address: </label></td>
-                <td><textarea
-                    id="businessAddress"
-                    className="form-control"
-                    rows={4}
-                    name="businessAddress"
-                    value={formData.businessAddress}
-                    onChange={handleChange}
-                    required
-                /></td>
-                </tr>
-                <br />
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="city">City: </label></td>
-                <td><input
-                    type="text"
-                    id="city"
-                    className="form-control"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    required
-                /></td>
-                </tr>
-<br />
-<tr>
-<td><label className="EventRegLabel" htmlFor="state">State: </label></td>
-                <td><input
-                    type="text"
-                    id="state"
-                    className="form-control"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleChange}
-                    required
-                /></td>
-                </tr>
-                <br />
-                <tr>
-                <td><label className="EventRegLabel" htmlFor="zipcode">Zipcode: </label></td>
-                <td><input
-                    type="text"
-                    id="zipcode"
-                    className="form-control"
-                    name="zipcode"
-                    value={formData.zipcode}
-                    onChange={handleChange}
-                    required
-                />
-                </td>
-                </tr>
-                <br />
-<tr>
-                <button type="submit" className="">Register</button>
-                </tr>
-            </form>
-            </section>
-            </table>
-            {/* <PaymentPage /> */}
-        </div>
-    );
+            <button className="eventRegbtn">Register</button>
+          </form>
+        </section>
+      </table>
+    </div>
+  );
 };
 
 export default EventRegister;

@@ -1,8 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Admin/DashboardEventRegEdit.css';
+import { useRef } from 'react';
+import { TokenContext } from '../Context/TokenProvider';
 
 const DashboardEventRegEdit= () => {
+
+  const sectionsRef = useRef([]);
+  const {token}=useContext(TokenContext);
+
+  useEffect(() => {
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('show');
+              } else {
+                  entry.target.classList.remove('show');
+              }
+          });
+      });
+
+      const elements = sectionsRef.current.filter(Boolean); // Filter out null values
+
+      elements.forEach((el) => observer.observe(el));
+
+      return () => {
+          elements.forEach((el) => observer.unobserve(el));
+      };
+  }, []);
+
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState({
@@ -11,9 +39,9 @@ const DashboardEventRegEdit= () => {
       lastName: "",
       email: "",
       age: "",
-      businessName: "",
-      organizationName: "",
-      businessAddress: "",
+      // businessName: "",
+      // organizationName: "",
+      // businessAddress: "",
       city: "",
       state: "",
       zipcode: "",
@@ -27,7 +55,12 @@ const DashboardEventRegEdit= () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/event_register/${id}`);
+        const response = await axios.get(`http://localhost:8000/event-registers/${id}/`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         setEvent(response.data);
       } catch (error) {
         console.error('Error fetching event data:', error);
@@ -55,7 +88,12 @@ const DashboardEventRegEdit= () => {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:8080/event_register/${id}`, event);
+      await axios.patch(`http://localhost:8000/event-registers/${id}/`, event,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       navigate('/admin/event-register');
     } catch (error) {
       console.error('Error updating Contact Form:', error);
@@ -64,11 +102,17 @@ const DashboardEventRegEdit= () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/event_register/${id}`);
+      await axios.delete(`http://localhost:8000/event-registers/${id}/`,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       navigate('/admin/event-register');
     } catch (error) {
       console.error('Error deleting users:', error);
     }
+    // navigate('/admin/event-register');
   };
 
   const handleAddField = (type) => {
@@ -86,99 +130,108 @@ const DashboardEventRegEdit= () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Edit Registered Data</h2>
-      <form>
-        <div className="mb-3">
-          <label className="form-label">First Name</label>
-          <input
+    <div className="eventRegEditFull">
+        <table className='eventRegEditTable'>
+        <section ref={(el) => (sectionsRef.current[0] = el)} className="EventReghidden1">
+      <p className="eventRegEditp">Edit Registered Data</p>
+      <form className='eventRegEditForm'>
+        <tr>
+          <td><label className="eventRegEditl">First Name</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="firstName"
             value={event.firstName}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Last Name</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+          <td><label className="eventRegEditl">Last Name</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="lastName"
             value={event.lastName}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Age</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+          <td><label className="eventRegEditl">Age</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="age"
             value={event.age}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">BusinessName</label>
+          /></td>
+          </tr>
+        
+        {/* 
+          <label className="eventRegEditl">BusinessName</label>
           <input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="businessName"
             value={event.businessName}
             onChange={handleChange}
           />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">OrganizationName</label>
+         */}
+        {/* 
+          <label className="eventRegEditl">OrganizationName</label>
           <input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="organizationName"
             value={event.organizationName}
             onChange={handleChange}
           />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">city</label>
-          <input
+         */}
+        <tr>
+          <td><label className="eventRegEditl">city</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="city"
             value={event.city}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">state</label>
-          <input
+          /></td>
+          </tr>
+        
+        <tr>
+          <td><label className="eventRegEditl">state</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="state"
             value={event.state}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">zipcode</label>
-          <input
+          /></td>
+          </tr>
+        
+        <tr>
+          <td><label className="eventRegEditl">zipcode</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventRegEditInput"
             name="businessName"
             value={event.zipcode}
             onChange={handleChange}
-          />
-        </div>
+          /></td>
+          </tr>
+        
        
        
-        <button type="button" className="btn btn-primary" onClick={handleSave}>
+        <button className="eventRegEditBtn1" onClick={handleSave}>
           Save
         </button>
-        <button type="button" className="btn btn-danger ms-2" onClick={handleDelete}>
+        <button className="eventRegEditBtn2" onClick={handleDelete}>
           Delete
         </button>
       </form>
-    </div>
+      </section>
+        </table>
+        </div>
+    
   );
 };
 

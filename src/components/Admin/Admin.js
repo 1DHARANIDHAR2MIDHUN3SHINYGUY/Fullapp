@@ -6,6 +6,7 @@ import '../Admin/Admin.css'
 import admin from '../../image/image.png'
 import 'intersection-observer'
 import { useEffect, useRef } from 'react';
+import Footer from '../Footer/Footer';
 
 
 const Admin = () => {
@@ -36,15 +37,10 @@ const Admin = () => {
       <img className="adminImg" src={admin} />
       <p className='adminh1'>Admin</p>
       <div className='admindiv1'>
-        <Link to="/admin/events">
-        <button onClick className='adminbtn1'>
-          manage events
-          </button>
-        </Link>
-
-        <Link to="/admin/users"><button className='adminbtn1'>manage user</button></Link>
-        {/* <br /> */}
-        <Link to="/admin/event-register"><button className='adminbtn3'>manage registeration</button></Link>
+        <Link to="/admin/events"><button className='adminbtn1'>Manage events</button></Link>
+        <Link to="/admin/users"><button className='adminbtn1'>Manage user</button></Link>
+        
+        <Link to="/admin/event-register"><button className='adminbtn3'>Manage registeration</button></Link>
       </div>
       <p className='adminp1'>  I am responsible for planning, organizing, and executing events of various types and scales.<br /> Their role involves coordinating all aspects of an event to ensure it runs smoothly and<br /> meets the objectives of the clients or organization they represent.</p>
       <section ref={(el) => (sectionsRef.current[0] = el)} className="Ahidden1">
@@ -53,14 +49,14 @@ const Admin = () => {
         <p className='adminp3'>Years in the Industry: 10 years</p>
         <p className='adminp4'>Types of Events Managed: Corporate events, weddings, trade shows, conferences, festivals, private parties, and product launches.</p>
       </section>
-      <section ref={(el) => (sectionsRef.current[1] = el)} className="Ahidden1">
+      {/* <section ref={(el) => (sectionsRef.current[1] = el)} className="Ahidden1"> */}
       <p className='adminNota'>Notable Projects:</p>
       <ul className='ull'>
         <li>Coordinated the annual Tech Innovators Conference with over 5,000 attendees.</li>
         <li>Managed high-profile weddings for celebrity clients.</li>
         <li>Organized the Global Sustainability Summit, featuring international speakers and exhibitors.</li>
       </ul>
-      </section>
+      {/* </section> */}
       <section ref={(el) => (sectionsRef.current[2] = el)} className="Ahidden1">
       <p className='adminp5'>Skills:</p>
       <p className='adminp6'>Organizational Skills: Mastery in handling complex logistics and multitasking across various aspects of event planning.</p>
@@ -116,6 +112,7 @@ const Admin = () => {
        <Link to="/admin/users"><button className='adminbtn1'>manage user</button></Link>
        <Link to="/admin/event-register"><button className='adminbtn1'>manage registeration</button></Link>
        </div> */}
+       <Footer />
 
     </div>
   )

@@ -37,7 +37,7 @@ const Organizer = () => {
       imageUrl: `${process.env.PUBLIC_URL}event_party1.jpg`,
     },
     {
-      id:2,
+      id:6,
       title: 'Marriage Events',
       imageUrl: `${process.env.PUBLIC_URL}event_party2.jpg`,
     },
@@ -47,17 +47,17 @@ const Organizer = () => {
       imageUrl: `${process.env.PUBLIC_URL}event_party3.jpg`,
     },
     {
-      id:4,
+      id:7,
       title: 'Conference Events',
       imageUrl: `${process.env.PUBLIC_URL}conference.jpg`,
     },
     {
-      id:5,
+      id:8,
       title: 'Product Launch',
       imageUrl: `${process.env.PUBLIC_URL}Product_launch.jpeg`,
     },
     {
-      id:6,
+      id:9,
       title: 'Trade Show',
       imageUrl: `${process.env.PUBLIC_URL}TradaShow.jpg`,
     },

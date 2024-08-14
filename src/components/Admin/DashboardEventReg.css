@@ -1,0 +1,40 @@
+.manageRegister
+{
+    /* align-items: center; */
+    /* text-align: center; */
+    margin-left: 45vh;
+    /* margin-top: 20vh; */
+}
+.manageRegisterp
+{
+    margin-left: 45vh;
+    font-size: 25px;
+    margin-top: 10vh;
+}
+.table3
+{
+    border-collapse: collapse;
+    margin-left: 10vh;
+    font-family: arial, sans-serif;
+}
+.table3td , .table3th{
+    text-align: left;
+    border-style: inset;
+  
+}
+.table3 , .table3th, .table3tr ,.table3td
+{
+    padding: 15px;
+    
+}
+
+.manageRegisterbtn1
+{
+    padding: 10px;
+    /* border-radius: 10px; */
+    font-size: 15px;
+    width: 70px;
+}
+.manageRegisterbtn1:hover{
+    cursor: pointer;
+}

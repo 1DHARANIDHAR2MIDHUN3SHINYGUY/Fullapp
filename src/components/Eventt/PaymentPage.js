@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+
+import React, { useContext,useState } from 'react';
 import '../Eventt/PaymentPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard, faUniversity, faMoneyCheckAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGooglePay } from '@fortawesome/free-brands-svg-icons';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+// import { ToastContainer, toast } from 'react-toastify';
+// import { Toast } from 'react-bootstrap';
+// import { toast } from 'react-toastify';
+// import { Toaster,toast } from 'react-hot-toast';
+import { TokenContext } from '../Context/TokenProvider';
+import 'react-toastify/dist/ReactToastify.css';
+// import { Axios } from 'axios';
+import axios from 'axios';
+
 
 
 const PaymentPage = () => {
+
+
   const [selectedTab, setSelectedTab] = useState('creditCard');
   const [amount, setAmount] = useState('₹.00');
   const [name, setName] = useState('');
@@ -16,31 +29,116 @@ const PaymentPage = () => {
   const [upiId, setUpiId] = useState('');
   const [selectedBank, setSelectedBank] = useState('');
   const [confirmationMessage, setConfirmationMessage] = useState('');
+  const {id}=useParams();
+
+  // const notify = () => toast("Payment Successful");
+  const {token}=useContext(TokenContext);
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
     // Reset values when changing tabs
     if (tab !== 'netBanking') setSelectedBank('');
   };
+  const navigate=useNavigate();
 
-  const handlePayment = () => {
+  const handlePayment = async (e) => {
+    e.preventDefault();
     if (selectedTab === 'creditCard' && cardNumber && expiryMonth && expiryYear && cvv) {
       setConfirmationMessage('Payment successful! Your booking is confirmed.');
+      
+      try {
+        const response=await axios.patch(`http://localhost:8000/event-registers/${id}/`, {
+          paymentStatus:"made"
+        },{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        console.log(response);
+        alert("success");
+      }
+      catch(error){
+        console.log(error);
+      }
+      navigate('/organizer');
     } else if (selectedTab === 'upi' && upiId) {
       setConfirmationMessage('Payment successful! Your booking is confirmed.');
+      try {
+        const response=await axios.patch(`http://localhost:8000/event-registers/${id}/`, {
+          paymentStatus:"made"
+        },{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        console.log(response);
+        alert("success");
+      }
+      catch(error){
+        console.log(error);
+      }
+      // alert("success");
+      // toast.success("Payment Successful");
+      navigate('/organizer');
     } else if (selectedTab === 'netBanking' && selectedBank) {
       setConfirmationMessage('Payment successful! Your booking is confirmed.');
+      try {
+        const response=await axios.patch(`http://localhost:8000/event-registers/${id}/`, {
+          paymentStatus:"made"
+        },{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        console.log(response);
+        alert("success");
+      }
+      catch(error){
+        console.log(error);
+      }
+      // alert("success");
+      // toast.success("Payment Successful");
+      navigate('/organizer');
     } else if (selectedTab === 'debitCard' && cardNumber && expiryMonth && expiryYear && cvv) {
       setConfirmationMessage('Payment successful! Your booking is confirmed.');
-    } else {
+      try {
+        const response=await axios.patch(`http://localhost:8000/event-registers/${id}/`, {
+          paymentStatus:"made"
+        },{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        console.log(response);
+        alert("success");
+      }
+      catch(error){
+        console.log(error);
+      }
+      // alert("success");
+      // toast.success("Payment Successful");
+      navigate('/organizer');
+    } 
+    
+    else {
       setConfirmationMessage('Please fill in all required fields.');
     }
+    
+
+
+    
+
+    
   };
 
   return (
     <div className="payment-container">
       <div className="pay-tabs">
-        <h2 className='Paymenth2'>Select Payment Method</h2>
+        <p className='Paymenth2'>Select Payment Method</p>
         <ul className="resp-tabs-list">
           <li onClick={() => handleTabChange('creditCard')} className={selectedTab === 'creditCard' ? 'active' : ''}>
             <FontAwesomeIcon icon={faCreditCard} /> <span>Credit Card</span>
@@ -55,6 +153,7 @@ const PaymentPage = () => {
           <li onClick={() => handleTabChange('debitCard')} className={selectedTab === 'debitCard' ? 'active' : ''}>
             <FontAwesomeIcon icon={faMoneyCheckAlt} /> <span>Debit Card</span>
           </li>
+          
         </ul>
       </div>
 
@@ -122,7 +221,8 @@ const PaymentPage = () => {
                   />
                 </div>
               </div>
-              <button className="PaymentSendbtn" type="button" onClick={handlePayment}>SEND</button>
+              <button className="PaymentSendbtn" onClick={handlePayment}>SEND</button>
+              <Link to="/organizer"><button className="notPayBtn">PAY LATER</button></Link>
             </form>
           </div>
         )}
@@ -169,7 +269,8 @@ const PaymentPage = () => {
               </label>
               {/* Repeat for other banks */}
             </div>
-            <button className='PaymentSendbtn'type="button" onClick={handlePayment}>CONTINUE</button>
+            <button className='PaymentSendbtn' onClick={handlePayment}>CONTINUE</button>
+            <Link to="/organizer"><button className="notPayBtn">PAY LATER</button></Link>
           </div>
         )}
 
@@ -182,9 +283,11 @@ const PaymentPage = () => {
                 type="text"
                 placeholder="example@upi"
                 value={upiId}
+                className='UpiInput'
                 onChange={(e) => setUpiId(e.target.value)}
               />
-              <button className='PaymentSendbtn'type="button" onClick={handlePayment}>PAY NOW</button>
+              <button className='PaymentSendbtn' onClick={handlePayment}>PAY NOW</button>
+              <Link to="/organizer"><button className="notPayBtn">PAY LATER</button></Link>
             </form>
           </div>
         )}
@@ -206,12 +309,14 @@ const PaymentPage = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                
               />
               <h5>Card Number</h5>
               <input
                 type="text"
                 value={cardNumber}
                 onChange={(e) => setCardNumber(e.target.value)}
+                // className='PaymentInput'
               />
               <div className="transaction">
                 <div className="tab-form-left">
@@ -244,7 +349,13 @@ const PaymentPage = () => {
                   />
                 </div>
               </div>
-              <button className='PaymentSendbtn' type="button" onClick={handlePayment}>SEND</button>
+              {/* <button onClick={notify}>Notify!</button> */}
+              <button className='PaymentSendbtn' onClick={handlePayment}>SEND</button>
+              <Link to="/organizer"><button className="notPayBtn">PAY LATER</button></Link>
+              
+              {/* <Toaster /> */}
+              
+              
             </form>
           </div>
         )}
@@ -256,3 +367,4 @@ const PaymentPage = () => {
 };
 
 export default PaymentPage;
+

@@ -1,0 +1,59 @@
+.manageEvent
+{
+    /* align-items: center; */
+    /* text-align: center; */
+    margin-left: 45vh;
+    /* margin-top: 20vh; */
+}
+.manageEventp
+{
+    margin-left: 50vh;
+    font-size: 25px;
+    margin-top: 10vh;
+}
+.table1
+{
+    border-collapse: collapse;
+  /* width: 100%; */
+  font-family: arial, sans-serif;
+  /* border-radius: 10px; */
+
+}
+.table1td , .table1th{
+    text-align: left;
+    border-style: inset;
+  
+}
+/* .table1tr:nth-child(even) 
+{
+    background-color: #dddddd;
+} */
+.table1 , .table1th, .table1tr ,.table1td
+{
+    padding: 15px;
+}
+.manageEventbtn1
+{
+    padding: 10px;
+    /* border-radius: 10px; */
+    font-size: 15px;
+    width: 70px;
+}
+.manageEventbtn1:hover{
+    cursor: pointer;
+}
+.manageEventbtn2
+{
+    padding: 10px;
+    /* border-radius: 10px; */
+    font-size: 15px;
+    /* position:absolute; */
+    /* width: 70px; */
+    margin-left: 130vh;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+    
+}
+.manageEventbtn2:hover{
+    cursor: pointer;
+}

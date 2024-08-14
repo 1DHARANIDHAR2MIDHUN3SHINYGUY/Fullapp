@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Admin/DashboardEventReg.css';
+import { TokenContext } from '../Context/TokenProvider';
 
 const DashboardEventReg = () => {
   const [data, setData] = useState([]);
+  const {token}=useContext(TokenContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/event_register');
+        const response = await axios.get('http://localhost:8000/event-registers/',{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -29,37 +37,33 @@ const DashboardEventReg = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered">
-          <thead className="thead-dark">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Bussniess Name</th>
-              <th>City</th>
-             
-            </tr>
-          </thead>
+    
+      <div className="manageRegister">
+        <p className='manageRegisterp'>REGISTERATION</p>
+        <table className="table3">
+          <tr className="table3tr">
+              <th className='table3th'>ID</th>
+              <th className='table3th'>Name</th>
+              <th className='table3th'>Email</th>
+              {/* <th className='table3th'>Bussniess Name</th> */}
+              <th className='table3th'>City</th>
+              <th className='table3th'>Edit</th>
+          </tr>
           <tbody>
             {data.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.firstName}</td>
-                <td>{item.email}</td>
-                <td>{item.businessName}</td>
-                <td>{item.city}</td>
+              <tr className="table3tr"key={item.id}>
+                <td className='table3td'>{item.id}</td>
+                <td className='table3td'>{item.firstName}</td>
+                <td className='table3td'>{item.email}</td>
+                {/* <td className='table3td'>{item.businessName}</td> */}
+                <td className='table3td'>{item.city}</td>
                
-                <td>
+                <td className='table3td'>
                   <a href={`/event-register-edit/${item.id}`}>
                   
-                  <Button
-                    variant="success"
-                    
-                  >
+                  <button className='manageRegisterbtn1'>
                     View
-                  </Button>
+                  </button>
                   </a>
                 </td>
               </tr>
@@ -67,8 +71,6 @@ const DashboardEventReg = () => {
           </tbody>
         </table>
       </div>
-  
-    </div>
   );
 };
 

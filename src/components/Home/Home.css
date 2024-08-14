@@ -256,6 +256,7 @@ background: linear-gradient(90deg, rgba(22,10,17,0.9136904761904762) 0%, rgba(15
 
 .explore-button {
   background-color: #fff;
+  /* background-color: transparent; */
   color: #000;
   border: none;
   padding: 10px 20px;

@@ -1,8 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Admin/DashboardEventAdd.css';
+import { useRef } from 'react';
+import { TokenContext } from '../Context/TokenProvider';
 
 const DashboardEventAdd = () => {
+
+  const sectionsRef = useRef([]);
+  const {token}=useContext(TokenContext);
+
+  useEffect(() => {
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('show');
+              } else {
+                  entry.target.classList.remove('show');
+              }
+          });
+      });
+
+      const elements = sectionsRef.current.filter(Boolean); // Filter out null values
+
+      elements.forEach((el) => observer.observe(el));
+
+      return () => {
+          elements.forEach((el) => observer.unobserve(el));
+      };
+  }, []);
+
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState({
@@ -15,7 +43,7 @@ const DashboardEventAdd = () => {
     // description: '',
     image: '',
     capacity: 0,
-    small_description: '',
+    description: '',
     location: '',
     type: '',
     // guest: '',
@@ -32,7 +60,12 @@ const DashboardEventAdd = () => {
     if (id) {
       const fetchEvent = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/corporateEvents/${id}`);
+          const response = await axios.get(`http://localhost:8000/corporate-events/${id}/`,{
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
           setEvent(response.data);
         } catch (error) {
           console.error('Error fetching event data:', error);
@@ -115,9 +148,14 @@ const DashboardEventAdd = () => {
       };
 
       const method = id ? 'put' : 'post';
-      const url = id ? `http://localhost:8080/corporateEvents/${id}` : 'http://localhost:8080/corporateEvents';
+      const url = id ? `http://localhost:8000/corporate-events/${id}/` : 'http://localhost:8000/corporate-events/';
 
-      await axios['post']('http://localhost:8080/corporateEvents', updatedEvent);
+      await axios['post']('http://localhost:8000/corporate-events/', updatedEvent,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       navigate('/admin/events');
     } catch (error) {
       console.error('Error saving event:', error);
@@ -130,7 +168,12 @@ const DashboardEventAdd = () => {
     setLoading(true); // Start loading
     try {
       if (id) {
-        await axios.delete(`http://localhost:8080/corporateEvents/${id}`);
+        await axios.delete(`http://localhost:8000/corporate-events/${id}/`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
       }
       navigate('/admin/events');
     } catch (error) {
@@ -155,128 +198,97 @@ const DashboardEventAdd = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>{id ? 'Edit Event' : 'Add Event'}</h2>
-      <form>
+    <div className="eventAddFull">
+      {/* <h2>{id ? 'Edit Event' : 'Add Event'}</h2> */}
+      <table className='eventAddTable'>
+      <section ref={(el) => (sectionsRef.current[0] = el)} className="EventReghidden1">
+      <p className='eventAddp'>ADD EVENT</p>
+      <form className='eventAddForm'>
+       
         {/* Other fields */}
-        <div className="mb-3">
-          <label className="form-label">Name</label>
-          <input
+        <tr>
+          <td><label className="eventAddl">Name</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventAddInput"
             name="name"
             value={event.name}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">venue</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+          <td><label className="eventAddl">Venue</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventAddInput"
             name="venue"
             value={event.venue}
             onChange={handleChange}
-          />
-        </div>
+          /></td>
+        </tr>
         {/* Repeat similar blocks for other fields */}
-        <div className="mb-3">
-          <label className="form-label">Date</label>
-          <input
+        <tr>
+          <td><label className="eventAddl">Date</label></td>
+          <td><input
             type="text"
-            className="form-control"
+            className="eventAddInput"
             name="date"
             value={event.date}
             onChange={handleChange}
-          />
-        </div>
-        {/* <div className="mb-3">
-          <label className="form-label">Organizer</label>
-          <input
+          /></td>
+        </tr>
+        
+        
+        <tr>
+          <td><label className="eventAddlsmall">Description</label></td>
+          <td><textarea
+            className="eventAddInputSmall"
+            name="description"
+            value={event.description}
+            onChange={handleChange}
+          /></td>
+        </tr>
+       
+        <tr>
+          <td><label className="eventAddl">Location</label></td>
+          <td><input
             type="text"
-            className="form-control"
-            name="organizer"
-            value={event.organizer}
-            onChange={handleChange}
-          />
-        </div> */}
-        {/* <div className="mb-3">
-          <label className="form-label">Organization</label>
-          <input
-            type="text"
-            className="form-control"
-            name="organization"
-            value={event.organization}
-            onChange={handleChange}
-          />
-        </div> */}
-        /
-        <div className="mb-3">
-          <label className="form-label">Small Description</label>
-          <textarea
-            className="form-control"
-            name="small_description"
-            value={event.small_description}
-            onChange={handleChange}
-          />
-        </div>
-        {/* <div className="mb-3">
-          <label className="form-label">Organization Details</label>
-          <textarea
-            className="form-control"
-            name="organization_details"
-            value={event.organization_details}
-            onChange={handleChange}
-          />
-        </div> */}
-        <div className="mb-3">
-          <label className="form-label">Location</label>
-          <input
-            type="text"
-            className="form-control"
+            className="eventAddInput"
             name="location"
             value={event.location}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Type</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+          <td><label className="eventAddl">Google Map</label></td>
+          <td><input
             type="text"
-            className="form-control"
-            name="type"
-            value={event.type}
+            className="eventAddInput"
+            name="gmap"
+            value={event.gmap}
             onChange={handleChange}
-          />
-        </div>
-        {/* <div className="mb-3">
-          <label className="form-label">Guest</label>
-          <input
-            type="text"
-            className="form-control"
-            name="guest"
-            value={event.guest}
-            onChange={handleChange}
-          />
-        </div> */}
-        <div className="mb-3">
-          <label className="form-label">Capacity</label>
-          <input
+          /></td>
+        </tr>
+        
+        
+        <tr>
+          <td><label className="eventAddl">Capacity</label></td>
+          <td><input
             type="number"
-            className="form-control"
+            className="eventAddInput"
             name="capacity"
             value={event.capacity}
             onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Image</label>
-          <input
+          /></td>
+        </tr>
+        <tr>
+          <td><label className="eventAddl">Image</label></td>
+          <td><input
             type="file"
-            className="form-control"
+            className="eventAddInput"
             accept="image/*"
             onChange={handleFileChange}
-          />
+          /></td>
           {imagePreview && (
             <img
               src={imagePreview} // Display the preview URL
@@ -285,61 +297,8 @@ const DashboardEventAdd = () => {
               style={{ maxWidth: '200px' }}
             />
           )}
-        </div>
-        {/* <div className="mb-3">
-          <label className="form-label">Inclusive</label>
-          {event.inclusive.map((item, index) => (
-            <div className="d-flex mb-2" key={index}>
-              <input
-                type="text"
-                className="form-control me-2"
-                value={item}
-                onChange={(e) => handleListChange('inclusive', index, e.target.value)}
-              />
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => handleRemoveField('inclusive', index)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => handleAddField('inclusive')}
-          >
-            Add Inclusive
-          </button>
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Exclusive</label>
-          {event.exclusive.map((item, index) => (
-            <div className="d-flex mb-2" key={index}>
-              <input
-                type="text"
-                className="form-control me-2"
-                value={item}
-                onChange={(e) => handleListChange('exclusive', index, e.target.value)}
-              />
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => handleRemoveField('exclusive', index)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => handleAddField('exclusive')}
-          >
-            Add Exclusive
-          </button>
-        </div> */}
+        </tr>
+        
         {loading ? (
           <div className="d-flex justify-content-center mb-3">
             <div className="spinner-border" role="status">
@@ -347,11 +306,14 @@ const DashboardEventAdd = () => {
             </div>
           </div>
         ) : (
-          <button type="button" className="btn btn-primary" onClick={handleSave} disabled={loading}>
+          <button className='eventAddBtn' onClick={handleSave} disabled={loading}>
             Save
           </button>
         )}
+        
       </form>
+      </section>
+      </table>
     </div>
   );
 };

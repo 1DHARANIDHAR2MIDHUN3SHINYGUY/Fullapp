@@ -36,16 +36,16 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/organizer" element={
-            // <PrivateRouter>
+            <PrivateRouter>
             <Organizer />
-            // </PrivateRouter>
+            </PrivateRouter>
             } />
           <Route path="/admin" element={<Admin />} />
           <Route path="/event-register/:id" element={<EventOrganizer />} />
           <Route path="/events/:id" element={<EventDetails />} />
           {/* <Route path="/events" element={<EventList />} /> */}
-          <Route path="/bookorganizer" element={<EventRegister />} />
-          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/bookorganizer/:id" element={<EventRegister />} />
+          <Route path="/payment/:id" element={<PaymentPage />} />
 
 
           <Route path="/admin/events" element={<DashboardEvent />} />
@@ -57,9 +57,6 @@ function App() {
           <Route path="/users-edit/:id" element={<DashboardUserEdit /> }/>
           <Route path="/admin/event-register" element={<DashboardEventReg />} />
           <Route path="/event-register-edit/:id" element={<DashboardEventRegEdit /> }/>
-
-
-
 
         </Routes>
       </BrowserRouter>

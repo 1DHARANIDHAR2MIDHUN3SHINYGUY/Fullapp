@@ -1,15 +1,76 @@
-.EventRegLabel {
+.eventRegLabel {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 20px;
+  color:aliceblue;
 
 }
 
 .EventRegImg {
   height: 60vh;
-  margin-left: 110vh;
+  margin-left: 90vh;
   position: absolute;
   margin-top: 12vh;
   width: 80vh;
 }
+.EventRegh1
+{
+  font-size: 30px;
+  color: aliceblue;
+  margin-top: 100px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.EventRegFull
+{
+  background: rgb(93,34,195);
+background: linear-gradient(0deg, rgba(93,34,195,1) 0%, rgba(0,0,0,1) 100%);
+  min-height: 97vh;
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+.eventRegInput
+{
+  margin-top: 20px;
+  font-size: 20px;
+  border-color:blueviolet;
+  color: aliceblue;
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  outline: none;
+  padding-left: 20px;
+  margin-left: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.EventRegTable{
+  margin-left: 20vh;
+}
+.eventRegbtn
+{
+  margin-top: 50px;
+  /* margin-left: 50vh */
+  padding:11px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 20px;
+  /* border-radius: 20px; */
+  background-color:blueviolet;
+  width: 100px;
+  border-radius: 10px;
+  border: none;
 
-.form-control {}
+
+}
+.eventRegbtn:hover{
+  cursor: pointer;
+  /* background-color: transparent; */
+  color: aliceblue;
+
+}
+
+.eventRegForm
+{
+  margin-top: 20px;
+}
