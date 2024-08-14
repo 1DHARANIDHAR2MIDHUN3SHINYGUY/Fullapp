@@ -19,4 +19,4 @@ class CorporateEventSerializer(serializers.ModelSerializer):
 class EventRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventRegister
-        fields = ['id', 'firstName', 'lastName', 'email', 'age', 'businessName', 'organizationName', 'businessAddress', 'city', 'state', 'zipcode', 'userId', 'eventId']
+        fields = ['id', 'firstName', 'lastName', 'email', 'age', 'city', 'state', 'zipcode', 'userId', 'eventId', 'paymentStatus']

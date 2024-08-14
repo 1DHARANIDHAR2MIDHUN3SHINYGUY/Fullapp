@@ -35,15 +35,12 @@ class EventRegister(models.Model):
     lastName = models.CharField(max_length=255)
     email = models.EmailField()
     age = models.IntegerField()
-    businessName = models.CharField(max_length=255)
-    organizationName = models.CharField(max_length=255)
-    businessAddress = models.TextField()
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     zipcode = models.CharField(max_length=10)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     eventId = models.ForeignKey(CorporateEvent, on_delete=models.CASCADE)
+    paymentStatus = models.CharField(max_length=50, default="not made")
 
     def __str__(self):
         return f"{self.firstName} {self.lastName} - {self.eventId.name}"
- 
